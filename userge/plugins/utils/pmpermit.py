@@ -28,7 +28,7 @@ noPmMessage = bk_noPmMessage = (
     "Please wait until you get approved to direct message "
     "And please dont spam until then "
 )
-blocked_message = bk_blocked_message = "**You were automatically blocked**"
+blocked_message = bk_blocked_message = "🚫 **You have been blocked by Userbot.**"
 
 
 async def _init() -> None:
@@ -294,7 +294,7 @@ async def uninvitedPmHandler(message: Message):
         PMPERMIT_MSG[message.from_user.id] = (
             await message.reply(
                 noPmMessage.format_map(SafeDict(**user_dict))
-                + "\n`- Protected by USERGE-X`"
+                + "\n\n`- Protected by @WWJollibee.`"
             )
         ).message_id
         await asyncio.sleep(1)
