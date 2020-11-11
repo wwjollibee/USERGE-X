@@ -47,7 +47,7 @@ async def _init() -> None:
 
 
 @userge.on_cmd(
-    "allow",
+    "o",
     about={
         "header": "allows someone to contact",
         "description": "Ones someone is allowed, "
@@ -69,10 +69,10 @@ async def allow(message: Message):
             {"_id": userid}, {"$set": {"status": "allowed"}}, upsert=True
         )
         if a.matched_count:
-            await message.edit("`Already approved to direct message`", del_in=3)
+            await message.edit("`Already accepted.`", del_in=2)
         else:
             await (await userge.get_users(userid)).unblock()
-            await message.edit("`Approved to direct message`", del_in=3)
+            await message.edit("✅ **An admin has accepted your request.** Start your conversation.", del_in=150)
 
         if userid in PMPERMIT_MSG:
             await userge.delete_messages(userid, message_ids=PMPERMIT_MSG[userid])
@@ -86,7 +86,7 @@ async def allow(message: Message):
 
 
 @userge.on_cmd(
-    "nopm",
+    "c",
     about={
         "header": "Activates guarding on inbox",
         "description": "Ones someone is allowed, "
@@ -105,9 +105,9 @@ async def denyToPm(message: Message):
             Config.ALLOWED_CHATS.remove(userid)
         a = await ALLOWED_COLLECTION.delete_one({"_id": userid})
         if a.deleted_count:
-            await message.edit("`Prohibitted to direct message`", del_in=3)
+            await message.edit("❎ **The chat has been closed by an admin.** Thank you!", del_in=300)
         else:
-            await message.edit("`Nothing was changed`", del_in=3)
+            await message.edit("`Already closed.`", del_in=2)
     else:
         await message.edit(
             "I need to reply to a user or provide the username/id or be in a private chat",
@@ -179,7 +179,7 @@ async def set_custom_nopm_message(message: Message):
     """ setup custom pm message """
     global noPmMessage  # pylint: disable=global-statement
     if "-r" in message.flags:
-        await message.edit("`Custom NOpm message reset`", del_in=3, log=True)
+        await message.edit("`Custom NoPM message reset`", del_in=3, log=True)
         noPmMessage = bk_noPmMessage
         await SAVED_SETTINGS.find_one_and_delete({"_id": "CUSTOM NOPM MESSAGE"})
     else:
