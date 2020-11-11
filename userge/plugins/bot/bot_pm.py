@@ -43,13 +43,9 @@ if userge.has_bot:
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello {f_name},
-Nice To Meet You! I'm **{bot.first_name}** A Bot.
-
-        <i><b>Powered by</i> [USERGE-X](https://t.me/x_xtests)</b>
-
-<b>My Master is: {master.first_name}</b>
-<i>You can contact my <b>Master</b> and checkout the <b>Repo</b> For more info.</i>
+Hello {f_username}, I'm **{bot.first_name}**.
+<b>I'm {master.first_name}'s Bot</b>
+<i>You can contact <b>WW Jollibee Help Desk </b> here.
 """
         if Config.BOT_FORWARDS:
             hello += "\n<b>NOTE: </b> "
@@ -131,14 +127,14 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("CONTACT", url=f"t.me/{u_n}"),
+                            InlineKeyboardButton("WW JOLLIBEE", url=f"t.me/wwjollibee"),
                             InlineKeyboardButton(
-                                "REPO", url="https://github.com/code-rgb/USERGE-X"
+                                "DUMPS", url="t.me/wwjollibeedumps"
                             ),
                         ],
                         [
                             InlineKeyboardButton(
-                                "➕ ADD TO GROUP", callback_data="add_to_grp"
+                                "WW Jollibee Help Desk", url="t.me/{u_n}"
                             )
                         ],
                     ]
