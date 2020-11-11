@@ -117,12 +117,12 @@ async def gban_user(message: Message):
             await chat.kick_member(user_id)
             gbanned_chats.append(chat.id)
             await CHANNEL.log(
-                r"\\**#Antispam_Log**//"
+                r"**#GBanned**"
                 f"\n**User:** {mention_html(user_id, firstname)}\n"
                 f"**User ID:** `{user_id}`\n"
                 f"**Chat:** {chat.title}\n"
                 f"**Chat ID:** `{chat.id}`\n"
-                f"**Reason:** `{reason}`\n\n$GBAN #id{user_id}"
+                f"**Reason:** __{reason}__"
             )
         except (ChatAdminRequired, UserAdminInvalid):
             pass
@@ -136,7 +136,7 @@ async def gban_user(message: Message):
     )
     if message.reply_to_message:
         await CHANNEL.fwd_msg(message.reply_to_message)
-        await CHANNEL.log(f"$GBAN #prid{user_id} ⬆️")
+        await CHANNEL.log(f"#GBAN #prid{user_id} ⬆️")
     LOG.info("G-Banned %s", str(user_id))
 
 
